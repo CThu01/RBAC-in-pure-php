@@ -8,7 +8,7 @@ require_once "../models/User.php";
 header("Content-Type : application/json");
 
 $service = new UserService();
-$respon = new ApiResponse();
+$resposn = new ApiResponse();
 
 try {
 
