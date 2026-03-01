@@ -45,11 +45,11 @@ class User
             $data['username'],
             $data['email'],
             $data['password'],
-            $data['roleId'],
+            $data['role_id'],
             $data['phone'],
             $data['address'],
             $data['gender'],
-            $data['isActive']
+            $data['is_active']
         );
     }
 

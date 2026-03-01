@@ -1,7 +1,7 @@
 <?php
 
-require_once "../config/Database.php";
-require_once "../models/User.php";
+require_once __DIR__ . "/../config/Database.php";
+require_once __DIR__ . "/../models/User.php";
 class UserRepository
 {
     private PDO $pdo;
@@ -18,9 +18,9 @@ class UserRepository
 
         $users = [];
         foreach ($rows as $row) {
-            $users = User::fromArray($row);
+            $users[$row['id']] = User::fromArray($row);
         }
-
+        // var_dump($users);
         return $users;
     }
 
@@ -98,8 +98,8 @@ class UserRepository
             $row['name'],
             $row['username'],
             $row['email'],
+            $row['password'],
             $row['role_id'],
-            $row['phone'],
             $row['phone'],
             $row['address'],
             $row['gender'],

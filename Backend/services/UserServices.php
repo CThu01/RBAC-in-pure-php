@@ -1,6 +1,6 @@
 <?php
 
-require_once "../repositories/UserRepository.php";
+require_once __DIR__ . "/../repositories/UserRepository.php";
 class UserService
 {
 
@@ -21,8 +21,23 @@ class UserService
         return $this->userRepo->save($user);
     }
 
-    public function updateUser(User $user): User
+    public function getById($id): User
     {
+        return $this->userRepo->findyById($id);
+    }
+
+    public function updateUser(User $user): User|string
+    {
+        $userId = $user->getId();
+        $user = $this->userRepo->findyById($userId);
+
+        if (!$user) {
+            return ApiResponse::toJson(
+                null,
+                "User Id $userId is not found",
+                404
+            );
+        }
         return $this->userRepo->update($user);
     }
 

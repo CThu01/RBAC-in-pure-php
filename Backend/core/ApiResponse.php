@@ -6,13 +6,13 @@ class ApiResponse
     private string $message;
     private mixed $data;
 
-    public function __construct(string $status, string $message, mixed $data)
-    {
+    // public function __construct(string $status, string $message, mixed $data)
+    // {
 
-        $this->status = $status;
-        $this->message = $message;
-        $this->data = $data;
-    }
+    //     $this->status = $status;
+    //     $this->message = $message;
+    //     $this->data = $data;
+    // }
 
     public function setStatus(string $status): void
     {
@@ -29,14 +29,20 @@ class ApiResponse
         $this->data = $data;
     }
 
-    public function toJson(): string
+    public static function toJson($data, string $message, int $statusCode): string
     {
-        return json_encode([
-            "status" => $this->status,
-            "message" => $this->message,
-            "data" => $this->data
+        http_response_code($statusCode);
+        header("Content-Type: application/json");
+        echo json_encode([
+            "status" => $statusCode,
+            "message" => $message,
+            "data" => $data
         ]);
+
+        exit;
     }
+
+
 
     public function getStatus(): string
     {
